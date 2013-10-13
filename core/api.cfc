@@ -118,8 +118,8 @@
 				<cfcontent reset="true" type="text/plain; charset=utf-8" />
 				<cfheader statuscode="500" statustext="Error" />
 				<cfoutput>An unhandled exception occurred: <cfif isStruct(root) and structKeyExists(root,"message")>#root.message#<cfelse>#root#</cfif> <cfif isStruct(root) and structKeyExists(root,"detail")>-- #root.detail#</cfif></cfoutput>
-				<cfdump var="#cfcatch#" format="text" />
-				<cfdump var="#exception#" format="text" />
+				<cfdump var="#cfcatch#" format="text" label="ERROR WHEN LOGGING EXCEPTION" />
+				<cfdump var="#cfcatch#" format="text" label="ORIGINAL EXCEPTION" />
 			</cfcatch>
 		</cftry>
 	</cffunction>
@@ -311,7 +311,7 @@
 				</cfif>
 
 			<cfelseif _taffyRequest.resultType eq "filename">
-				<cfcontent reset="true" file="#_taffyRequest.result.getFileName()#" type="#_taffyRequest.result.getFileMime()#" />
+				<cfcontent reset="true" file="#_taffyRequest.result.getFileName()#" type="#_taffyRequest.result.getFileMime()#" deletefile="#_taffyRequest.result.getDeleteFile()#" />
 
 			<cfelseif _taffyRequest.resultType eq "filedata">
 				<cfcontent reset="true" variable="#_taffyRequest.result.getFileData()#" type="#_taffyRequest.result.getFileMime()#" />
